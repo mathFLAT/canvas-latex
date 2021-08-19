@@ -2,18 +2,22 @@ var canvas = document.getElementById('canvas');
 
 
 const getParameterByName = (name) => {
-    const url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  const url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+console.log(getParameterByName('strict'))
 const options = {
-  displayMode: JSON.parse( getParameterByName('displayMode') || true ),
-  debugBounds: JSON.parse( getParameterByName('debugBounds') || true ),
+  displayMode: getParameterByName('displayMode') || true,
+  debugBounds: getParameterByName('debugBounds') || false,
+  alignment: getParameterByName('alignment') || "left",
+  baseSize: getParameterByName('baseSize') || 44,
+  strict: getParameterByName('strict') || "ignore",
 };
 
 var widget = new window.CanvasLatex.default('', options)
@@ -67,14 +71,15 @@ window.WebFont.load({
   }
 })
 
-function updateWidget () {
+function updateWidget() {
   widget.latex = input.value
   redraw()
 }
 
-function redraw () {
+function redraw() {
   const bounds = widget.getBounds()
-  bounds && widget.set({ x: -bounds.x, y: 10 - bounds.y })
+  console.log(canvas.width, canvas.height, bounds.width, bounds.height, { x: -bounds.x, y: (canvas.height + bounds.y) / 2 })
+  bounds && widget.set({ x: -bounds.x + 10, y: (canvas.height / 2 - bounds.height) / 2 })
   stage.update()
 }
 
