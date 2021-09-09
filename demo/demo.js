@@ -16,7 +16,7 @@ const options = {
   displayMode: getParameterByName('displayMode') || true,
   debugBounds: getParameterByName('debugBounds') || false,
   alignment: getParameterByName('alignment') || "left",
-  baseSize: getParameterByName('baseSize') || 40,
+  baseSize: getParameterByName('baseSize') || 39.5,
   strict: getParameterByName('strict') || "ignore",
 };
 
