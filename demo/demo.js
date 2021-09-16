@@ -80,7 +80,7 @@ function redraw() {
   const bounds = widget.getBounds()
   console.log(canvas.width, canvas.height, bounds.width, bounds.height, { x: -bounds.x, y: (canvas.height + bounds.y) / 2 })
   // bounds && widget.set({ x: -bounds.x + 10, y: (canvas.height / 2 - bounds.height) / 2 })
-  bounds && widget.set({ x: -bounds.x + 10, y: (canvas.height / 2 - bounds.height + 10)})
+  bounds && widget.set({ x: -bounds.x + 10, y: (canvas.height / 2)})
   stage.update()
 }
 
